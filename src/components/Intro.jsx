@@ -16,10 +16,10 @@ export default function Intro() {
 
   return (
     <div className="h-screen overflow-hidden relative">
-      <div className="bg-black/20 absolute inset-0 z-20 flex flex-col gap-4 items-center justify-center">
-        <h1 className="text-white font-bold font-mori text-6xl text-center">
+      <div className="bg-black/15 absolute inset-0 z-20 flex flex-col gap-4 items-center justify-center">
+        <h1 className="text-white font-extrabold font-mori text-8xl text-center">
           <span>
-            <span className="font-alegreya text-7xl font-normal italic">
+            <span className="font-alegreya text-8xl font-normal italic">
               {"True "}
             </span>
             to Oneself
@@ -32,11 +32,14 @@ export default function Intro() {
             </span>
           </span>
         </h1>
-        <p className="text-white font-mori text-center font-">
+        <p className="text-white font-mori text-center font-normal text-lg">
           Unreservedly honest products that truly be,
           <br />
           kind to skin and the planet – no exceptions!
         </p>
+        <Button className="top-[80%] absolute  p-6 bg-transparent rounded-full border-white border flex items-center justify-center cursor-pointer text-white font-mori hover:bg-white hover:text-black">
+          <p className="m-0 relative z-10">Explore our products</p>
+        </Button>
       </div>
 
       <motion.div style={{ y }} className="relative h-full">
