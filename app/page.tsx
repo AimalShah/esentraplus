@@ -2,10 +2,10 @@
 
 import ProductSection from "@/components/product-section";
 import PhilosophySection from "@/components/philosophy-section";
-import { RevealLinks } from "@/components/links";
+import ContactSection from "@/components/contact-section";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Reveal, RevealText, RevealHeading, ScaleIn, SlideIn } from "@/components/animations/Reveal";
+import { SlideIn } from "@/components/animations/Reveal";
 
 const easeOut = [0.25, 0.1, 0.25, 1] as const;
 
@@ -34,7 +34,7 @@ const parent1 = {
 };
 
 const child = {
-  hidden: { y: 100, opacity: 1 },
+  hidden: { y: 60, opacity: 1 },
   show: { y: 0, opacity: 1, transition: { ease: easeOut } },
 };
 
@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <div ref={heroRef} className="h-screen p-0 m-0 relative overflow-hidden">
+      <div ref={heroRef} className="min-h-screen md:h-screen p-0 m-0 relative overflow-hidden">
         <motion.div
           initial={{ y: 100, scale: 0.9 }}
           animate={{ y: 0, scale: 1 }}
@@ -72,54 +72,66 @@ export default function Home() {
             className="w-full h-full object-cover"
           />
         </motion.div>
+        
+        {/* Hero Content */}
         <motion.div 
           style={{ y: textY, opacity: heroOpacity }}
-          className="absolute z-20 inset-0 flex flex-col gap-4 justify-center items-center"
+          className="absolute z-20 inset-0 flex flex-col gap-3 md:gap-4 justify-center items-center px-4 py-20"
         >
+          {/* First Line - Pure Care for */}
           <div className="overflow-hidden">
             <motion.h1
               variants={parent}
               initial="hidden"
               animate="show"
-              className="md:text-8xl font-mono text-white font-bold text-center text-wrap overflow-hidden flex gap-2"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-mono text-white font-bold text-center flex flex-wrap justify-center gap-x-3 md:gap-x-4"
             >
               {"Pure Care for".split(" ").map((word, index) => (
-                <motion.h2 key={index} variants={child}>{word}</motion.h2>
+                <motion.span key={index} variants={child} className="block">
+                  {word}
+                </motion.span>
               ))}
             </motion.h1>
           </div>
+
+          {/* Second Line - Radiant Skin */}
           <div className="overflow-hidden">
             <motion.h1
               variants={parent1}
               initial="hidden"
               animate="show"
-              className="md:text-8xl font-mono text-white font-bold text-center text-wrap overflow-hidden flex gap-4"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-mono text-white font-bold text-center flex flex-wrap justify-center gap-x-3 md:gap-x-4"
             >
               {"Radiant Skin".split(" ").map((word, index) => (
-                <motion.h2 key={index} variants={child}>{word}</motion.h2>
+                <motion.span key={index} variants={child} className="block">
+                  {word}
+                </motion.span>
               ))}
             </motion.h1>
           </div>
 
+          {/* Description */}
           <motion.p
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, ease: easeOut, duration: 0.8 }}
-            className="font-sans text-white/70 md:w-[50%] text-center text-lg px-4"
+            className="font-sans text-white/70 text-center text-base sm:text-lg md:text-xl px-4 max-w-2xl md:max-w-[50%] mt-2 md:mt-4"
           >
             Nourish your skin with formulas inspired by nature and perfected by
             science. Gentle, effective, and designed for real results — because
             healthy skin should look effortless.
           </motion.p>
+
+          {/* CTA Button */}
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6, ease: easeOut, duration: 0.8 }}
-            className="space-x-8 mt-12 font-mono"
+            className="mt-8 md:mt-12 font-mono"
           >
             <a 
               href="#products"
-              className="border border-white text-white p-4 px-8 text-xl rounded-full font-semibold hover:bg-white hover:text-[#2D1F1B] transition-all duration-300 cursor-pointer inline-block"
+              className="border border-white text-white py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg md:text-xl rounded-full font-semibold hover:bg-white hover:text-[#2D1F1B] transition-all duration-300 cursor-pointer inline-block"
             >
               View Products
             </a>
@@ -150,19 +162,19 @@ export default function Home() {
       <PhilosophySection />
 
       {/* Why Choose Us Section */}
-      <div className="md:max-w-[82rem] mx-auto px-4 py-20">
+      <div className="md:max-w-[82rem] mx-auto px-4 py-16 md:py-20">
         <div className="flex md:flex-row-reverse flex-col md:gap-28">
-          <SlideIn direction="right" className="w-full flex flex-col md:justify-center gap-8">
-            <h2 className="md:text-3xl text-xl md:text-start text-center font-mono font-bold">
+          <SlideIn direction="right" className="w-full flex flex-col md:justify-center gap-6 md:gap-8">
+            <h2 className="text-2xl md:text-3xl md:text-start text-center font-mono font-bold">
               Why Choose <span className="text-[#819076]">Us</span>
             </h2>
-            <p className="text-lg md:text-start text-center font-sans text-[#2D1F1B]/70">
+            <p className="text-base md:text-lg md:text-start text-center font-sans text-[#2D1F1B]/70">
               Our attention to details and satisfaction of our clients is what
               sets us apart from others in the Wellness industry.
             </p>
           </SlideIn>
           <SlideIn direction="left">
-            <div className="md:p-10 md:mt-0 mt-10">
+            <div className="md:p-10 md:mt-0 mt-8">
               <div className="rounded-2xl relative overflow-hidden">
                 <motion.div 
                   className="absolute w-full h-full rounded-2xl bg-[#EAE4D7] z-[-1] -rotate-6"
@@ -183,26 +195,7 @@ export default function Home() {
       </div>
 
       {/* Contact Section */}
-      <div className="mt-15 md:max-w-[82rem] mx-auto mb-10 px-4">
-        <ScaleIn className="w-full flex justify-center">
-          <p className="bg-white font-mono font-bold text-sm px-4 py-2 rounded-full shadow-sm">
-            CONTACT
-          </p>
-        </ScaleIn>
-        <div className="md:space-y-4 mt-4">
-          <RevealHeading delay={0.2} className="text-center font-mono font-bold text-3xl md:text-5xl">
-            Get in Touch
-          </RevealHeading>
-          <div className="flex justify-center">
-            <RevealText delay={0.4} className="text-center font-sans text-lg md:w-1/2 text-[#2D1F1B]/60">
-              We'd love to hear from you. Reach out and let's create something beautiful together.
-            </RevealText>
-          </div>
-        </div>
-        <Reveal delay={0.6}>
-          <RevealLinks />
-        </Reveal>
-      </div>
+      <ContactSection />
     </>
   );
 }

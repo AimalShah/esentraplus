@@ -1,15 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import CartButton from './cart/CartButton';
 import CartDrawer from './cart/CartDrawer';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,54 +82,7 @@ export default function Header() {
           >
             <CartButton />
           </motion.div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-[#2D1F1B] hover:text-[#819076] transition-colors"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </motion.button>
         </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="md:hidden bg-[#F6F5F0]/95 backdrop-blur-md border-t border-[#819076]/10 overflow-hidden"
-            >
-              <nav className="flex flex-col py-4 px-4">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      duration: 0.4, 
-                      delay: index * 0.1, 
-                      ease: [0.25, 0.1, 0.25, 1] 
-                    }}
-                  >
-                    <Link 
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="font-mono text-sm font-medium text-[#2D1F1B] hover:text-[#819076] transition-colors py-3 border-b border-[#2D1F1B]/5"
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.header>
       
       {/* Spacer for fixed header */}
