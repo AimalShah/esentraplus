@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Unbounded, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import NewsLetter from "@/components/newsletter";
+import Reveal from "@/components/Reveal";
 
 const workSans = Work_Sans({
   variable: "--font-geist-sans",
@@ -29,7 +30,8 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} ${unbounded.variable} antialiased bg-background font-sans`}
       >
-        <Header />
+        {/*<Reveal />*/}
+        {/*<Header />*/}
         {children}
         <NewsLetter />
       </body>

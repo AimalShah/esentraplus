@@ -1,13 +1,115 @@
 "use client";
+
 import ProductSection from "@/components/product-section";
 import Hero from "@/components/Hero";
 import PhilosophySection from "@/components/philosophy-section";
 import { RevealLinks } from "@/components/links";
+import { motion } from "framer-motion";
+
+const parent = {
+  hidden: {},
+  show: {
+    transition: {
+      duration: 0.7,
+      ease: "circInOut",
+      staggerChildren: 0.15, // delay between spans
+      delayChildren: 0.9, // delay before first span
+    },
+  },
+};
+const parent1 = {
+  hidden: {},
+  show: {
+    transition: {
+      duration: 0.7,
+      ease: "circInOut",
+      staggerChildren: 0.15, // delay between spans
+      delayChildren: 1.2, // delay before first span
+    },
+  },
+};
+
+const child = {
+  hidden: { y: 100 },
+  show: { y: 0, opacity: 1, transition: { ease: "easeInOut" } },
+};
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <div className="h-screen  p-0 m-0 relative">
+        <motion.div
+          initial={{ y: 100, scale: 0.9 }}
+          animate={{ y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="absolute inset-0 bg-black/40 z-10"
+        />
+        <motion.div
+          initial={{ y: 100, scale: 0.9 }}
+          animate={{ y: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="absolute inset-0 z-0"
+        >
+          <img
+            src="https://images.pexels.com/photos/1502219/pexels-photo-1502219.jpeg"
+            alt="img"
+            style={{ zIndex: -1 }}
+            className="w-full h-full object-cover "
+          />
+        </motion.div>
+        <div className="absolute z-20 inset-0 flex flex-col gap-4 justify-center items-center z-20">
+          <div className=" overflow-hidden">
+            <motion.h1
+              variants={parent}
+              initial="hidden"
+              animate="show"
+              className="md:text-8xl font-mono text-white font-bold text-center text-wrap overflow-hidden flex gap-2 "
+            >
+              {"Pure Care for".split(" ").map((word, index) => (
+                <motion.h2 variants={child}>{word}</motion.h2>
+              ))}
+            </motion.h1>
+          </div>
+          <div className=" overflow-hidden">
+            <motion.h1
+              variants={parent1}
+              initial="hidden"
+              animate="show"
+              className="md:text-8xl font-mono text-white font-bold text-center text-wrap overflow-hidden flex gap-4 "
+            >
+              {"Radiant Skin".split(" ").map((word, index) => (
+                <motion.h2 variants={child}>{word}</motion.h2>
+              ))}
+            </motion.h1>
+          </div>
+
+          <motion.p
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, ease: "easeInOut", duration: 0.8 }}
+            className="font-sans text-white/70 md:w-[50%] text-center text-lg"
+          >
+            Nourish your skin with formulas inspired by nature and perfected by
+            science. Gentle, effective, and designed for real results — because
+            healthy skin should look effortless.
+          </motion.p>
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: [0, 0, 1] }}
+            transition={{ delay: 0.4, ease: "easeInOut", duration: 0.8 }}
+            className="space-x-8 mt-12 font-mono"
+          >
+            <button
+              className="border border-white text-white p-4 tex-xl rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300
+              cursor-pointer
+              "
+            >
+              View Products
+            </button>
+          </motion.div>
+        </div>
+      </div>
+      {/*<Hero />*/}
       <ProductSection />
       <PhilosophySection />
       <div className="md:max-w-[82rem] mx-auto">
