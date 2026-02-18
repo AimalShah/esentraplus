@@ -6,6 +6,7 @@ import { formatPrice } from '@/lib/woocommerce';
 import { useCartStore } from '@/lib/store';
 import { WooProduct } from '@/types/woocommerce';
 import { ShoppingBag, Loader2 } from 'lucide-react';
+import { Reveal, RevealText, ScaleIn, StaggerContainer, StaggerItem } from './animations/Reveal';
 
 async function fetchProducts(): Promise<WooProduct[]> {
   try {
@@ -57,33 +58,40 @@ export default function ProductSection() {
 
   return (
     <div id="products" className="mt-15 md:max-w-[82rem] mx-auto mb-40">
-      <div className="w-full flex justify-center">
-        <p className="bg-white font-mono font-bold text-sm px-4 py-2 rounded-full">
+      <ScaleIn className="w-full flex justify-center">
+        <p className="bg-white font-mono font-bold text-sm px-4 py-2 rounded-full shadow-sm">
           PRODUCTS
         </p>
-      </div>
+      </ScaleIn>
       <div className="md:space-y-4 mt-4">
-        <h2 className="text-center font-mono font-bold text-3xl">
-          Our Most-Loved Essentials
-        </h2>
+        <Reveal direction="up" delay={0.1}>
+          <h2 className="text-center font-mono font-bold text-3xl md:text-4xl">
+            Our Most-Loved Essentials
+          </h2>
+        </Reveal>
         <div className="flex justify-center">
-          <p className="text-center font-sans text-lg md:w-1/2">
+          <RevealText delay={0.2} className="text-center font-sans text-lg md:w-1/2 text-[#2D1F1B]/70">
             Carefully selected by you — discover the skincare favorites that
             glow beyond expectations.
-          </p>
+          </RevealText>
         </div>
       </div>
 
       {/* PRODUCT CARD SECTION */}
-      <div className="flex item-center justify-center gap-8 flex-wrap px-4">
+      <StaggerContainer 
+        staggerDelay={0.1} 
+        delayChildren={0.3}
+        className="flex item-center justify-center gap-8 flex-wrap px-4"
+      >
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={() => addToCart(product, 1)}
-          />
+          <StaggerItem key={product.id}>
+            <ProductCard
+              product={product}
+              onAddToCart={() => addToCart(product, 1)}
+            />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
 
       {error && (
         <p className="text-center font-sans text-red-500 mt-4 text-sm">
@@ -113,14 +121,12 @@ function ProductCard({
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="mt-12 flex items-center justify-center"
-    >
-      <div className="group p-2 md:min-h-[28rem] w-full bg-white rounded-2xl md:w-80 flex flex-col gap-4 cursor-pointer hover:shadow-lg transition-shadow duration-300">
+    <div className="flex items-center justify-center">
+      <motion.div 
+        layout
+        whileHover={{ y: -5 }}
+        className="group p-2 md:min-h-[28rem] w-full bg-white rounded-2xl md:w-80 flex flex-col gap-4 cursor-pointer hover:shadow-lg transition-shadow duration-300"
+      >
         {/* Image Container */}
         <div className="relative h-64 overflow-hidden rounded-2xl bg-[#F6F5F0]">
           {imageUrl ? (
@@ -205,8 +211,8 @@ function ProductCard({
             )}
           </motion.button>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 

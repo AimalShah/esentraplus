@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import NewsLetter from "@/components/newsletter";
 import Footer from "@/components/footer";
+import SmoothScroll from "@/components/animations/SmoothScroll";
 
 const workSans = Work_Sans({
   variable: "--font-geist-sans",
@@ -30,10 +31,12 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} ${unbounded.variable} antialiased bg-background font-sans`}
       >
-        <Header />
-        {children}
-        <NewsLetter />
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          {children}
+          <NewsLetter />
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
