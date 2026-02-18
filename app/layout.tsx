@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Unbounded, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import NewsLetter from "@/components/newsletter";
-import Reveal from "@/components/Reveal";
+import Footer from "@/components/footer";
 
 const workSans = Work_Sans({
   variable: "--font-geist-sans",
@@ -17,7 +17,7 @@ const unbounded = Unbounded({
 
 export const metadata: Metadata = {
   title: "ESENTRA+",
-  description: "",
+  description: "Pure care for radiant skin",
 };
 
 export default function RootLayout({
@@ -30,10 +30,10 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} ${unbounded.variable} antialiased bg-background font-sans`}
       >
-        {/*<Reveal />*/}
-        {/*<Header />*/}
+        <Header />
         {children}
         <NewsLetter />
+        <Footer />
       </body>
     </html>
   );

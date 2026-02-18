@@ -37,7 +37,7 @@ const child = {
 export default function Home() {
   return (
     <>
-      <div className="h-screen  p-0 m-0 relative">
+      {/* <div className="h-screen  p-0 m-0 relative">
         <motion.div
           initial={{ y: 100, scale: 0.9 }}
           animate={{ y: 0, scale: 1 }}
@@ -108,8 +108,9 @@ export default function Home() {
             </button>
           </motion.div>
         </div>
-      </div>
-      {/*<Hero />*/}
+      </div>*/}
+
+      <Hero />
       <ProductSection />
       <PhilosophySection />
       <div className="md:max-w-[82rem] mx-auto">
